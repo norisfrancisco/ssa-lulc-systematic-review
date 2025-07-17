@@ -1,0 +1,110 @@
+import ee
+import time
+
+ee.Initialize()
+
+# =============================
+# 1. Parâmetros
+# =============================
+anos = [2001, 2006, 2011, 2016]
+
+moz = ee.FeatureCollection("USDOS/LSIB_SIMPLE/2017") \
+    .filter(ee.Filter.eq('country_na', 'Mozambique')) \
+    .geometry()
+
+def aguardar_exportacao(task, nome):
+    print(f"⏳ Aguardando exportação: {nome}...")
+    while task.active():
+        print(f"🔄 Exportando {nome}... aguardando...")
+        time.sleep(30)
+    print(f"✅ Exportação finalizada: {nome}. Status: {task.status()['state']}\n" + "-" * 60)
+
+# =============================
+# 2. Função para exportar
+# =============================
+def exportar_img(img, nome, ano, scale):
+    task = ee.batch.Export.image.toDrive(
+        image=img,
+        description=f'{nome}_{ano}',
+        folder='GEE_EXPORT',
+        fileNamePrefix=f'{nome}_{ano}',
+        region=moz,
+        scale=scale,
+        crs='EPSG:4326',
+        maxPixels=1e13
+    )
+    task.start()
+    aguardar_exportacao(task, nome)
+
+# =============================
+# 3. Função de processamento
+# =============================
+def processar_ano(ano):
+    print(f"\n🚀 Processando ano {ano}...")
+
+    start_date = f'{ano}-01-01'
+    end_date   = f'{ano}-12-31'
+
+    # =================== MODIS Surface Reflectance (500 m)
+    modis_sr = ee.ImageCollection("MODIS/061/MOD09GA") \
+        .filterDate(start_date, end_date) \
+        .filterBounds(moz) \
+        .select(['sur_refl_b01', 'sur_refl_b02', 'sur_refl_b03', 'sur_refl_b04', 'sur_refl_b06']) \
+        .median().multiply(0.0001).clip(moz)
+
+    red   = modis_sr.select('sur_refl_b01')
+    nir   = modis_sr.select('sur_refl_b02')
+    blue  = modis_sr.select('sur_refl_b03')
+    green = modis_sr.select('sur_refl_b04')
+    swir  = modis_sr.select('sur_refl_b06')
+
+    # Índices de vegetação
+    ndvi = nir.subtract(red).divide(nir.add(red)).rename('NDVI')
+    ndwi = red.subtract(swir).divide(red.add(swir)).rename('NDWI')
+    ndbi = swir.subtract(nir).divide(swir.add(nir)).rename('NDBI')
+    evi = nir.subtract(red).multiply(2.5).divide(nir.add(red.multiply(6)).subtract(blue.multiply(7.5)).add(1)).rename('EVI')
+    gci = nir.divide(green).subtract(1).rename('GCI')
+    bsi = (swir.add(red).subtract(nir.add(blue))).divide(swir.add(red).add(nir).add(blue)).rename('BSI')
+    savi = nir.subtract(red).multiply(1.5).divide(nir.add(red).add(0.5)).rename('SAVI')
+
+    # Topografia (SRTM 90m)
+    dem = ee.Image("CGIAR/SRTM90_V4").clip(moz)
+    elevation = dem.rename('Elevation')
+    slope = ee.Terrain.slope(dem).rename('Slope')
+    aspect = ee.Terrain.aspect(dem).rename('Aspect')
+
+    # Entropia
+    nir_scaled = nir.multiply(1000).toInt()
+    entropy = nir_scaled.glcmTexture().select('sur_refl_b02_ent').rename('Entropy')
+
+    topografia = elevation.addBands([slope, aspect, entropy])
+
+    # Exportar: Índices de vegetação + topografia
+    indices_veg = ndvi.addBands([ndwi, ndbi, evi, gci, bsi, savi]).addBands(topografia)
+    exportar_img(indices_veg, "MODIS_IndicesVeg", ano, scale=500)
+
+    # =================== Albedo MODIS (500 m)
+    albedo = ee.ImageCollection("MODIS/061/MCD43A3") \
+        .filterDate(start_date, end_date) \
+        .select('Albedo_WSA_shortwave') \
+        .mean().rename('Albedo') \
+        .clip(moz)
+
+    exportar_img(albedo.addBands(topografia), "MODIS_Albedo", ano, scale=500)
+
+    # =================== LST MODIS (1 km)
+    lst = ee.ImageCollection("MODIS/061/MOD11A2") \
+        .filterDate(start_date, end_date) \
+        .select('LST_Day_1km') \
+        .mean().multiply(0.02).subtract(273.15).rename('LST') \
+        .clip(moz)
+
+    exportar_img(lst.addBands(topografia), "MODIS_LST", ano, scale=1000)
+
+# =============================
+# 4. Loop por ano
+# =============================
+for ano in anos:
+    processar_ano(ano)
+
+print("🎉 Todas as exportações foram iniciadas com sucesso!")

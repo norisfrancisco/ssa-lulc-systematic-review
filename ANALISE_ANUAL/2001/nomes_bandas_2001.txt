@@ -1,0 +1,14 @@
+Albedo_Mean_2001_B1
+BAEI_Mean_2001_B1
+GCI_Mean_2001_B1
+LST_Mean_2001_B1
+NDBI_Mean_2001_B1
+SAVI_Mean_2001_B1
+UI_Mean_2001_B1
+VARI_Mean_2001_B1
+Topografia_Static_B1
+Topografia_Static_B2
+Topografia_Static_B3
+Topografia_Statics_B1
+Topografia_Statics_B2
+Topografia_Statics_B3
