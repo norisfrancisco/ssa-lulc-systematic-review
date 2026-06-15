@@ -1,9 +1,27 @@
-___pycache__/
+# Data files — download from Zenodo (DOI in README)
+data/*.xlsx
+data/*.csv
+data/*.bib
+data/*.json
+!data/README.txt
+
+# Generated outputs — created at runtime
+outputs/
+07_results/
+__pycache__/
 *.pyc
-*.ipynb_checkpoints
-.env
+*.pyo
 .DS_Store
-*.tif
-*.zip
+.ipynb_checkpoints/
+*.log
 
+# Environment
+.env
+venv/
+.venv/
+*.egg-info/
 
+# Editor
+.vscode/
+.idea/
+*.swp
