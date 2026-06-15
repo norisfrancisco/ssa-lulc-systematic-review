@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it using the metadata below."
+type: software
+title: "SSA-LULC Systematic Review Pipeline"
+abstract: >
+  Computational pipeline for a systematic review of LULC classification
+  methodologies in Sub-Saharan Africa (1991-2026). Includes BibTeX
+  deduplication, REGEX bibliometric screening, Cochran validation sampling,
+  OLS meta-regression with logit transformation, HC3 robust errors, bootstrap
+  confidence intervals, Cook's Distance analysis, and figure generation.
+  All results are reproducible with the included data (Zenodo DOI pending).
+authors:
+  - family-names: "Noris"
+    given-names: "Francisco José"
+    affiliation: "UNESP — Faculdade de Ciências Agronômicas, Botucatu, Brazil"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: "Sarnighausen"
+    given-names: "Valéria Cristina Rodrigues"
+    affiliation: "UNESP — Faculdade de Ciências Agronômicas, Botucatu, Brazil"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+version: 1.0.0
+date-released: "2026-06-15"
+license: MIT
+url: "https://github.com/norisfrancisco/ssa-lulc-systematic-review"
+repository-code: "https://github.com/norisfrancisco/ssa-lulc-systematic-review"
+keywords:
+  - systematic review
+  - LULC classification
+  - Sub-Saharan Africa
+  - meta-regression
+  - remote sensing
+  - Python
+  - PRISMA 2020
+preferred-citation:
+  type: article
+  title: >
+    Methodologies of land use mapping in Sub-Saharan Africa:
+    a systematic review
+  authors:
+    - family-names: "Noris"
+      given-names: "Francisco José"
+    - family-names: "Sarnighausen"
+      given-names: "Valéria Cristina Rodrigues"
+  journal: "Remote Sensing of Environment"
+  year: 2026
+  status: "in-preparation"
+  notes: "In submission"

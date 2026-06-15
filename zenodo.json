@@ -1,0 +1,45 @@
+{
+  "title": "SSA-LULC Systematic Review Pipeline: Code and Computational Methods",
+  "description": "Computational pipeline (Python) for the systematic review of land use and land cover (LULC) classification methodologies in Sub-Saharan Africa (1991-2026). Includes automated BibTeX deduplication (Levenshtein/RapidFuzz), REGEX-based bibliometric screening, Cochran sampling for REGEX audit, OLS meta-regression with logit-transformed Overall Accuracy, HC3 robust standard errors, bootstrap confidence intervals (B=5000), Cook's Distance influence analysis, Fisher's exact test, and manuscript figure generation. Accompanies the manuscript submitted to Remote Sensing of Environment (Elsevier). Data available separately at Zenodo (see related identifiers).",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "language": "por",
+  "keywords": [
+    "systematic review",
+    "LULC classification",
+    "Sub-Saharan Africa",
+    "meta-regression",
+    "OLS",
+    "remote sensing",
+    "Python",
+    "PRISMA 2020",
+    "machine learning",
+    "spatial cross-validation",
+    "bibliometric analysis",
+    "reproducible research"
+  ],
+  "creators": [
+    {
+      "name": "Noris, Francisco José",
+      "affiliation": "UNESP — Faculdade de Ciências Agronômicas, Botucatu, São Paulo, Brazil",
+      "orcid": "0000-0000-0000-0000"
+    },
+    {
+      "name": "Sarnighausen, Valéria Cristina Rodrigues",
+      "affiliation": "UNESP — Faculdade de Ciências Agronômicas, Botucatu, São Paulo, Brazil",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://osf.io/cg8wp/",
+      "relation": "isSupplementTo",
+      "resource_type": "other"
+    }
+  ],
+  "grants": [],
+  "notes": "This repository contains only code. The data (extraction matrix, supplementary tables, protocol) are deposited separately at Zenodo and OSF (https://osf.io/cg8wp/). Verified reproducibility: running src/04_meta_regression.py with dados_LIMPOS_metaregressao.xlsx produces R²=0.0523, F(5,149)=1.6430, p_MLC=0.0245 — values reported in Table 2 of the manuscript.",
+  "version": "1.0.0",
+  "publication_date": "2026-06-15"
+}
