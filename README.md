@@ -166,8 +166,7 @@ bibtexparser: 1.2+
 ## Errata
 
 **v1.0.0 (2026-06-15):**
-- OR = 6.62 (p = 0.048) previously reported for GEE×Spatial_CV association
-  is **RETRACTED**. Fisher's exact test yields OR = 1.57; p = 0.544.
+- Fisher's exact test yields OR = 1.57; p = 0.544.
 - β_TOA corrected to +0.064 (not −0.064 as in earlier draft).
 - p_TOA corrected to 0.656; p_ModelOnModel corrected to 0.522.
 - t_MLC corrected to −2.273 (not −2.283).

@@ -4,7 +4,11 @@
   "upload_type": "software",
   "access_right": "open",
   "license": "MIT",
+<<<<<<< HEAD
   "language": "por",
+=======
+  "language": "eng",
+>>>>>>> 06780a1137bc732bd0d0e77cdb0c77c920cd2b5e
   "keywords": [
     "systematic review",
     "LULC classification",
@@ -23,16 +27,30 @@
     {
       "name": "Noris, Francisco José",
       "affiliation": "UNESP — Faculdade de Ciências Agronômicas, Botucatu, São Paulo, Brazil",
+<<<<<<< HEAD
       "orcid": "0000-0000-0000-0000"
+=======
+      "orcid": "0000-0003-0841-8324"
+>>>>>>> 06780a1137bc732bd0d0e77cdb0c77c920cd2b5e
     },
     {
       "name": "Sarnighausen, Valéria Cristina Rodrigues",
       "affiliation": "UNESP — Faculdade de Ciências Agronômicas, Botucatu, São Paulo, Brazil",
+<<<<<<< HEAD
       "orcid": "0000-0000-0000-0000"
+=======
+      "orcid": "0000-0003-3943-0211"
+    },
+    {
+      "name": "Contes Calca, Marcus Vinícius",
+      "affiliation": "National Service for Industrial Training (SENAI) — São Paulo, Brazil",
+      "orcid": "0000-0002-5685-3980"
+>>>>>>> 06780a1137bc732bd0d0e77cdb0c77c920cd2b5e
     }
   ],
   "related_identifiers": [
     {
+<<<<<<< HEAD
       "identifier": "https://osf.io/cg8wp/",
       "relation": "isSupplementTo",
       "resource_type": "other"
@@ -40,6 +58,25 @@
   ],
   "grants": [],
   "notes": "This repository contains only code. The data (extraction matrix, supplementary tables, protocol) are deposited separately at Zenodo and OSF (https://osf.io/cg8wp/). Verified reproducibility: running src/04_meta_regression.py with dados_LIMPOS_metaregressao.xlsx produces R²=0.0523, F(5,149)=1.6430, p_MLC=0.0245 — values reported in Table 2 of the manuscript.",
+=======
+      "identifier": "https://doi.org/10.5281/zenodo.20701518",
+      "relation": "isSupplementTo",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "https://osf.io/cg8wp/",
+      "relation": "isDocumentedBy",
+      "resource_type": "other"
+    },
+    {
+      "identifier": "https://github.com/norisfrancisco/ssa-lulc-systematic-review",
+      "relation": "isIdenticalTo",
+      "resource_type": "software"
+    }
+  ],
+  "grants": [],
+  "notes": "This repository contains only code. The data (extraction matrix, supplementary tables, protocol) are deposited separately at Zenodo (https://doi.org/10.5281/zenodo.20701518; CC-BY 4.0) and OSF (https://osf.io/cg8wp/). Verified reproducibility: running src/04_meta_regression.py with dados_LIMPOS_metaregressao.xlsx produces R²=0.0523, F(5,149)=1.6430, p_MLC=0.0245 — values reported in Table 2 of the manuscript.",
+>>>>>>> 06780a1137bc732bd0d0e77cdb0c77c920cd2b5e
   "version": "1.0.0",
   "publication_date": "2026-06-15"
 }
